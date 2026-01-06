@@ -10,8 +10,8 @@ public class InstanceController {
     private int port;
 
     @GetMapping("/api/debug/instance")
-    public String instance() {
-        String host = System.getenv().getOrDefault("HOSTNAME", "local");
-        return "instance=" + host + " internalPort=" + port;
+    public String getInstanceInfo() { // Renamed method
+        String hostName = System.getenv().getOrDefault("HOSTNAME", "localhost"); // Renamed var
+        return "Service Node: " + hostName + " | Port: " + port; // Changed output format
     }
 }

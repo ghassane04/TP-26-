@@ -25,13 +25,13 @@ resilience4j:
     instances:
       pricing:
         maxAttempts: 3
-        waitDuration: 300ms
+        waitDuration: 400ms # Changed from 300ms
   circuitbreaker:
     instances:
       pricing:
         slidingWindowType: COUNT_BASED
         slidingWindowSize: 10
-        minimumNumberOfCalls: 5
-        failureRateThreshold: 50
-        waitDurationInOpenState: 10s
-        permittedNumberOfCallsInHalfOpenState: 2
+        minimumNumberOfCalls: 4 # Changed from 5
+        failureRateThreshold: 60 # Changed from 50
+        waitDurationInOpenState: 12s # Changed from 10s
+        permittedNumberOfCallsInHalfOpenState: 3

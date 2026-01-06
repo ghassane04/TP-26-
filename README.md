@@ -38,6 +38,8 @@ Le système est composé de 2 services principaux :
 
 ## Tests et Validation
 
+![Test Postman](images/1.jpg)
+
 Une collection Postman `postman_collection.json` est incluse pour tester les scénarios suivants :
 
 1.  **Santé** : Vérification des endpoints Actuator.

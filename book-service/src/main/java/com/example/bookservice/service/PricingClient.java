@@ -19,15 +19,15 @@ public class PricingClient {
     }
 
     @Retry(name = "pricing")
-    @CircuitBreaker(name = "pricing", fallbackMethod = "fallbackPrice")
+    @CircuitBreaker(name = "pricing", fallbackMethod = "defaultPrice") // Renamed fallback
     public double getPrice(long bookId) {
-        String url = baseUrl + "/api/prices/" + bookId;
+        String url = baseUrl + "/api/cost/" + bookId; // Changed endpoint
         Double price = rest.getForObject(url, Double.class);
         return price == null ? 0.0 : price;
     }
 
     // signature obligatoire : mêmes paramètres + Throwable
-    public double fallbackPrice(long bookId, Throwable ex) {
+    public double defaultPrice(long bookId, Throwable ex) { // Renamed method
         return 0.0;
     }
 }

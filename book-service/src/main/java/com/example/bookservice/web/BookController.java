@@ -24,8 +24,8 @@ public class BookController {
     @ResponseStatus(HttpStatus.CREATED)
     public Book create(@RequestBody Book b) { return service.create(b); }
 
-    @PostMapping("/{id}/borrow")
-    public BookService.BorrowResult borrow(@PathVariable long id) {
-        return service.borrow(id);
+    @PostMapping("/{id}/rent") // Change path from /borrow
+    public BookService.BorrowResult rent(@PathVariable long id) { // Renamed method
+        return service.rentBook(id); // Called renamed service method
     }
 }

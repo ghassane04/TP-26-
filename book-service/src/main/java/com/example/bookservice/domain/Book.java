@@ -3,16 +3,16 @@ package com.example.bookservice.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "book")
+@Table(name = "library_book") // Changed table name
 public class Book {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false, unique=true, length=120)
+    @Column(nullable=false, unique=true, length=150) // Changed length
     private String title;
 
-    @Column(nullable=false, length=80)
+    @Column(nullable=false, length=100) // Changed length
     private String author;
 
     @Column(nullable=false)
@@ -36,7 +36,7 @@ public class Book {
     public void setStock(int stock) { this.stock = stock; }
 
     public void decrementStock() {
-        if (stock <= 0) throw new IllegalStateException("Plus d’exemplaires");
+        if (stock < 1) throw new IllegalStateException("Out of stock!");
         stock--;
     }
 }

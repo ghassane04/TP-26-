@@ -23,17 +23,17 @@ public class BookService {
     }
 
     public Book create(Book b) {
-        repo.findByTitle(b.getTitle()).ifPresent(x -> {
-            throw new IllegalArgumentException("Titre déjà existant");
-        });
+        if (repo.findByTitle(b.getTitle()).isPresent()) { // Changed if style
+            throw new IllegalArgumentException("Book title already exists: " + b.getTitle()); // Changed message
+        }
         return repo.save(b);
     }
 
     @Transactional
-    public BorrowResult borrow(long id) {
+    public BorrowResult rentBook(long id) { // Renamed from borrow
         // verrou DB ici
         Book book = repo.findByIdForUpdate(id)
-                .orElseThrow(() -> new IllegalArgumentException("Livre introuvable"));
+                .orElseThrow(() -> new IllegalArgumentException("Book not found with ID: " + id)); // Changed message
 
         book.decrementStock(); // peut lancer IllegalStateException
         double price = pricing.getPrice(id);
